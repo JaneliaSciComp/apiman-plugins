@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "Authorization Policy Plugin",
+  "description" : "This plugin provides a standard apiman authorization policy.  This policy must be used in combination with a supported authentication policy such as BASIC auth or Keycloak OAuth.",
+  "version" : "${project.version}"
+}
