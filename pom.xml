@@ -241,6 +241,7 @@
     <module>circuit-breaker-policy</module>
     <module>cors-policy</module>
     <module>http-security-policy</module>
+    <module>iplist-policy</module>
     <module>jsonp-policy</module>
     <module>keycloak-oauth-policy</module>
     <module>log-policy</module>

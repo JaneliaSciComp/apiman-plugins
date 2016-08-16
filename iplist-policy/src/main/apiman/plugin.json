@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "IP White/Black-List Policy Plugin",
+  "description" : "This plugin provides the IP Whitelist Policy and IP Blacklist Policy, used to control access (by IP Address) to an API.",
+  "version" : "${project.version}"
+}

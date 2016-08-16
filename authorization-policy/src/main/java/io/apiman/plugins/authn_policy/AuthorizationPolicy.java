@@ -21,7 +21,6 @@ import io.apiman.gateway.engine.beans.PolicyFailureType;
 import io.apiman.gateway.engine.components.IPolicyFailureFactoryComponent;
 import io.apiman.gateway.engine.policies.AbstractMappedPolicy;
 import io.apiman.gateway.engine.policies.PolicyFailureCodes;
-import io.apiman.gateway.engine.policies.i18n.Messages;
 import io.apiman.gateway.engine.policy.IPolicyChain;
 import io.apiman.gateway.engine.policy.IPolicyContext;
 
@@ -72,7 +71,7 @@ public class AuthorizationPolicy extends AbstractMappedPolicy<AuthorizationConfi
 
         // If no roles are set in the context - then fail with a configuration error
         if (userRoles == null) {
-            String msg = Messages.i18n.format("AuthorizationPolicy.MissingRoles"); //$NON-NLS-1$
+            String msg = Messages.format("AuthorizationPolicy.MissingRoles"); //$NON-NLS-1$
             PolicyFailure failure = context.getComponent(IPolicyFailureFactoryComponent.class).createFailure(
                     PolicyFailureType.Other, PolicyFailureCodes.CONFIGURATION_ERROR, msg);
             chain.doFailure(failure);
@@ -82,7 +81,7 @@ public class AuthorizationPolicy extends AbstractMappedPolicy<AuthorizationConfi
         if (isAuthorized(config, verb, resource, userRoles)) {
             chain.doApply(request);
         } else {
-            String msg = Messages.i18n.format("AuthorizationPolicy.Unauthorized"); //$NON-NLS-1$
+            String msg = Messages.format("AuthorizationPolicy.Unauthorized"); //$NON-NLS-1$
             PolicyFailure failure = context.getComponent(IPolicyFailureFactoryComponent.class).createFailure(
                     PolicyFailureType.Authorization, PolicyFailureCodes.USER_NOT_AUTHORIZED, msg);
             chain.doFailure(failure);

@@ -1,0 +1,14 @@
+{
+  "id" : "IPBlacklistPolicy",
+  "name" : "IP Blacklist Policy",
+  "description" : "Requests that originate from a specified set of valid IP addresses will be denied access.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.gateway.engine.policies.IPBlacklistPolicy",
+  "icon" : "thumbs-down",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Requests that originate from the set of @{ipList.size()} configured IP address(es) will be denied access to the managed API."
+    }
+  ],
+  "formType" : "Default"
+}

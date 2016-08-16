@@ -1,0 +1,14 @@
+{
+  "id" : "IPWhitelistPolicy",
+  "name" : "IP Whitelist Policy",
+  "description" : "Only requests that originate from a specified set of valid IP addresses will be allowed through.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.gateway.engine.policies.IPWhitelistPolicy",
+  "icon" : "thumbs-up",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Only requests that originate from the set of @{ipList.size()} configured IP address(es) will be allowed to invoke the managed API."
+    }
+  ],
+  "formType" : "Default"
+}
