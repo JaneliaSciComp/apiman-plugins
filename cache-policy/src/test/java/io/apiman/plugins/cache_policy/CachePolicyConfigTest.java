@@ -15,9 +15,6 @@
  */
 package io.apiman.plugins.cache_policy;
 
-import io.apiman.gateway.engine.policies.CachingPolicy;
-import io.apiman.gateway.engine.policies.config.CachingConfig;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,21 +24,21 @@ import org.junit.Test;
  * @author eric.wittmann@redhat.com
  */
 @SuppressWarnings({ "nls" })
-public class CachingPolicyConfigTest {
+public class CachePolicyConfigTest {
 
     /**
-     * Test method for {@link io.apiman.gateway.engine.policies.CachingPolicy#parseConfiguration(java.lang.String)}.
+     * Test method for {@link io.apiman.gateway.engine.policies.CachePolicy#parseConfiguration(java.lang.String)}.
      */
     @Test
     public void testParseConfiguration() {
-        CachingPolicy policy = new CachingPolicy();
+        CachePolicy policy = new CachePolicy();
 
         // Empty config test
         String config = "{}";
         Object parsed = policy.parseConfiguration(config);
         Assert.assertNotNull(parsed);
-        Assert.assertEquals(CachingConfig.class, parsed.getClass());
-        CachingConfig parsedConfig = (CachingConfig) parsed;
+        Assert.assertEquals(CacheConfig.class, parsed.getClass());
+        CacheConfig parsedConfig = (CacheConfig) parsed;
         Assert.assertEquals(0, parsedConfig.getTtl());
 
         // Sample real config
@@ -50,7 +47,7 @@ public class CachingPolicyConfigTest {
                 "}";
 
         parsed = policy.parseConfiguration(config);
-        parsedConfig = (CachingConfig) parsed;
+        parsedConfig = (CacheConfig) parsed;
         Assert.assertEquals(12345L, parsedConfig.getTtl());
     }
 

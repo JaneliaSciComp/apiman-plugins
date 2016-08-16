@@ -20,14 +20,14 @@ package io.apiman.plugins.cache_policy;
  *
  * @author rubenrm1@gmail.com
  */
-public class CachingConfig {
+public class CacheConfig {
 
     private long ttl; // in seconds
 
     /**
      * Constructor.
      */
-    public CachingConfig() {
+    public CacheConfig() {
     }
 
     /**

@@ -15,7 +15,6 @@
  */
 package io.apiman.plugins.cache_policy;
 
-import io.apiman.gateway.engine.policies.CachingPolicy;
 import io.apiman.test.common.mock.EchoResponse;
 import io.apiman.test.policies.ApimanPolicyTest;
 import io.apiman.test.policies.Configuration;
@@ -32,9 +31,9 @@ import org.junit.Test;
  *
  * @author eric.wittmann@redhat.com
  */
-@TestingPolicy(CachingPolicy.class)
+@TestingPolicy(CachePolicy.class)
 @SuppressWarnings("nls")
-public class CachingPolicyTest extends ApimanPolicyTest {
+public class CachePolicyTest extends ApimanPolicyTest {
 
     @Test
     @Configuration("{" +

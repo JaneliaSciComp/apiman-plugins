@@ -42,7 +42,7 @@ import java.io.IOException;
  *
  * @author rubenrm1@gmail.com
  */
-public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> implements IDataPolicy {
+public class CachePolicy extends AbstractMappedDataPolicy<CacheConfig> implements IDataPolicy {
 
     private static final String KEY_SEPARATOR = ":"; //$NON-NLS-1$
     private static final String SHOULD_CACHE_ATTR = CachePolicy.class.getName() + ".should-cache"; //$NON-NLS-1$
@@ -59,8 +59,8 @@ public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> impleme
      * @see io.apiman.gateway.engine.policy.AbstractPolicy#getConfigurationClass()
      */
     @Override
-    protected Class<CachingConfig> getConfigurationClass() {
-        return CachingConfig.class;
+    protected Class<CacheConfig> getConfigurationClass() {
+        return CacheConfig.class;
     }
 
     /**
@@ -71,7 +71,7 @@ public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> impleme
      * @see io.apiman.gateway.engine.policies.AbstractMappedPolicy#doApply(io.apiman.gateway.engine.beans.ApiRequest, io.apiman.gateway.engine.policy.IPolicyContext, java.lang.Object, io.apiman.gateway.engine.policy.IPolicyChain)
      */
     @Override
-    protected void doApply(final ApiRequest request, final IPolicyContext context, final CachingConfig config,
+    protected void doApply(final ApiRequest request, final IPolicyContext context, final CacheConfig config,
             final IPolicyChain<ApiRequest> chain) {
         if (config.getTtl() > 0) {
             // Check to see if there is a cache entry for this request.  If so, we need to
@@ -106,7 +106,7 @@ public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> impleme
      * @see AbstractMappedPolicy#doApply(ApiResponse, IPolicyContext, Object, IPolicyChain)
      */
     @Override
-    protected void doApply(ApiResponse response, IPolicyContext context, CachingConfig config,
+    protected void doApply(ApiResponse response, IPolicyContext context, CacheConfig config,
             IPolicyChain<ApiResponse> chain) {
         chain.doApply(response);
     }
@@ -116,7 +116,7 @@ public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> impleme
      */
     @Override
     protected IReadWriteStream<ApiRequest> requestDataHandler(ApiRequest request,
-            IPolicyContext context, CachingConfig policyConfiguration) {
+            IPolicyContext context, CacheConfig policyConfiguration) {
         // No need to handle the request stream (e.g. POST body)
         return null;
     }
@@ -126,7 +126,7 @@ public class CachePolicy extends AbstractMappedDataPolicy<CachingConfig> impleme
      */
     @Override
     protected IReadWriteStream<ApiResponse> responseDataHandler(final ApiResponse response,
-            IPolicyContext context, CachingConfig policyConfiguration) {
+            IPolicyContext context, CacheConfig policyConfiguration) {
         // Possible cache the response for future posterity.
         Boolean shouldCache = context.getAttribute(SHOULD_CACHE_ATTR, Boolean.TRUE);
         if (shouldCache) {
