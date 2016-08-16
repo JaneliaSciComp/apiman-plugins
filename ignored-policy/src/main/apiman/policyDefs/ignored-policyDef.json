@@ -1,0 +1,14 @@
+{
+  "id" : "IgnoredResourcesPolicy",
+  "name" : "Ignored Resources Policy",
+  "description" : "Requests satisfying the provided regular expression will be ignored.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.ignored_policy.IgnoredResourcesPolicy",
+  "icon" : "eye-slash",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Requests matching any of the @{rules.size()} regular expressions provided will receive a 404 error code."
+    }
+  ],
+  "formType" : "Default"
+}

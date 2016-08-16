@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "Ignored Resources Policy Plugin",
+  "description" : "This plugin provides a standard apiman policy that allows API managers to hide/shade/ignore certain portions of their API (resource paths).",
+  "version" : "${project.version}"
+}
