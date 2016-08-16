@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "Cache Policy Plugin",
+  "description" : "This plugin provides a very simple, standard apiman cache policy.  The cache policy provides a way to cache the response from an API request (based on TTL).",
+  "version" : "${project.version}"
+}

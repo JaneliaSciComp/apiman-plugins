@@ -1,0 +1,14 @@
+{
+  "id" : "CachePolicy",
+  "name" : "Cache Policy",
+  "description" : "Allows caching of API responses in the Gateway to reduce overall traffic to the back-end API.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.cache_policy.CachePolicy",
+  "icon" : "hdd-o",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "API responses will be cached for @{ttl} seconds."
+    }
+  ],
+  "formType" : "Default"
+}

@@ -238,6 +238,7 @@
 
   <modules>
     <module>authorization-policy</module>
+    <module>cache-policy</module>
     <module>circuit-breaker-policy</module>
     <module>cors-policy</module>
     <module>http-security-policy</module>
