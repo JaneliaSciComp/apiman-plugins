@@ -92,6 +92,7 @@
 
     <version.commons-lang>2.6</version.commons-lang>
     <version.com.fasterxml.jackson>2.5.4</version.com.fasterxml.jackson>
+    <version.joda-time>2.7</version.joda-time>
     <version.org.keycloak>2.0.0.Final</version.org.keycloak>
     <version.org.apache.commons.commons-lang3>3.3.2</version.org.apache.commons.commons-lang3>
     <version.org.bouncycastle>1.52</version.org.bouncycastle>
@@ -220,6 +221,11 @@
         <version>${version.com.fasterxml.jackson}</version>
       </dependency>
       <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${version.joda-time}</version>
+      </dependency>
+      <dependency>
         <groupId>org.keycloak</groupId>
         <artifactId>keycloak-common</artifactId>
         <version>${version.org.keycloak}</version>
@@ -256,6 +262,7 @@
     <module>rates-policy</module>
     <module>simple-header-policy</module>
     <module>soap-authorization-policy</module>
+    <module>tra-policy</module>
     <module>transformation-policy</module>
     <module>url-whitelist-policy</module>
     <module>repository</module>

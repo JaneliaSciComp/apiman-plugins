@@ -1,0 +1,14 @@
+{
+  "id" : "TimeRestrictedAccess",
+  "name" : "Time Restricted Access",
+  "description" : "Requests matching the specified regular expression and made within the specified time period will be ignored.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.tra_policy.TimeRestrictedAccessPolicy",
+  "icon" : "fa-clock-o",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Requests matching the regular expression and made outside the specified time period will receive a 423 error code."
+    }
+  ],
+  "formType" : "Default"
+}
