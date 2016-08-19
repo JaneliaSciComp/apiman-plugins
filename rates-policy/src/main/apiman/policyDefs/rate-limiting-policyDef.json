@@ -1,0 +1,14 @@
+{
+  "id" : "RateLimitingPolicy",
+  "name" : "Rate Limiting Policy",
+  "description" : "Enforces rate configurable request rate limits on an API.  This ensures that consumers can't overload an API with too many requests.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.rates_policy.RateLimitingPolicy",
+  "icon" : "tachometer",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Consumers are limited to @{limit} requests per @{granularity} per @{period}."
+    }
+  ],
+  "formType" : "Default"
+}

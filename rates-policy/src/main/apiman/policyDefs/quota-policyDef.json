@@ -1,0 +1,14 @@
+{
+  "id" : "QuotaPolicy",
+  "name" : "Quota Policy",
+  "description" : "Provides a way to limit the total number of requests that can be sent to an API.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.rates_policy.QuotaPolicy",
+  "icon" : "exchange",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Consumers cannot exceed their quota of @{limit} requests per @{granularity} per @{period}."
+    }
+  ],
+  "formType" : "Default"
+}

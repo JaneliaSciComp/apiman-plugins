@@ -93,6 +93,7 @@
     <version.commons-lang>2.6</version.commons-lang>
     <version.com.fasterxml.jackson>2.5.4</version.com.fasterxml.jackson>
     <version.org.keycloak>2.0.0.Final</version.org.keycloak>
+    <version.org.apache.commons.commons-lang3>3.3.2</version.org.apache.commons.commons-lang3>
     <version.org.bouncycastle>1.52</version.org.bouncycastle>
     <version.org.json>20140107</version.org.json>
   </properties>
@@ -204,6 +205,11 @@
         <version>${version.commons-lang}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${version.org.apache.commons.commons-lang3}</version>
+      </dependency>
+      <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
         <version>${version.com.fasterxml.jackson}</version>
@@ -247,6 +253,7 @@
     <module>jsonp-policy</module>
     <module>keycloak-oauth-policy</module>
     <module>log-policy</module>
+    <module>rates-policy</module>
     <module>simple-header-policy</module>
     <module>soap-authorization-policy</module>
     <module>transformation-policy</module>

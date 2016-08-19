@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "Rates Policy Plugin",
+  "description" : "This plugin provides several rate policies, including Rate Limiting, Quota, and Transfer Quota.",
+  "version" : "${project.version}"
+}
