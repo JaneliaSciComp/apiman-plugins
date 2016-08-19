@@ -1,0 +1,15 @@
+{
+  "id" : "BASICAuthenticationPolicy",
+  "name" : "BASIC Authentication Policy",
+  "description" : "Enables HTTP BASIC Authentication on an API.  Some configuration required.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.authn_policy.BasicAuthenticationPolicy",
+  "icon" : "lock",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Access to the API is protected by BASIC Authentication through the '@{realm}' authentication realm.  @if{forwardIdentityHttpHeader != null}Successfully authenticated requests will forward the authenticated identity to the back end API via the '@{forwardIdentityHttpHeader}' custom HTTP header.@end{}"
+    }
+  ],
+  "formType" : "Default"
+}
+}

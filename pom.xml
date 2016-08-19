@@ -90,6 +90,7 @@
     <version.org.mockito>1.9.5</version.org.mockito>
     <version.junit>4.11</version.junit>
 
+    <version.commons-codec>1.10</version.commons-codec>
     <version.commons-lang>2.6</version.commons-lang>
     <version.com.fasterxml.jackson>2.5.4</version.com.fasterxml.jackson>
     <version.joda-time>2.7</version.joda-time>
@@ -201,6 +202,11 @@
       </dependency>
       <!-- others -->
       <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${version.commons-codec}</version>
+      </dependency>
+      <dependency>
         <groupId>commons-lang</groupId>
         <artifactId>commons-lang</artifactId>
         <version>${version.commons-lang}</version>
@@ -250,6 +256,7 @@
 
   <modules>
     <module>authorization-policy</module>
+    <module>basic-auth-policy</module>
     <module>cache-policy</module>
     <module>circuit-breaker-policy</module>
     <module>cors-policy</module>

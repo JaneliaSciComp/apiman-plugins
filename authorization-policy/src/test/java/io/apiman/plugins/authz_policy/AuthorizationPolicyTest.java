@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.apiman.plugins.authn_policy;
+package io.apiman.plugins.authz_policy;
 
 import java.util.HashSet;
 
@@ -26,6 +26,7 @@ import io.apiman.gateway.engine.beans.ApiRequest;
 import io.apiman.gateway.engine.components.IPolicyFailureFactoryComponent;
 import io.apiman.gateway.engine.policy.IPolicyChain;
 import io.apiman.gateway.engine.policy.IPolicyContext;
+import io.apiman.plugins.authz_policy.AuthorizationPolicy;
 
 /**
  * Unit test

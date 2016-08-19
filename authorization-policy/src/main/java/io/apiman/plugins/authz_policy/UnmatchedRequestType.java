@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.apiman.plugins.authn_policy;
+package io.apiman.plugins.authz_policy;
 
 /**
- * How to behave if multiple rules match the request.
+ * What to do if no authorization rules match the request.
  *
  * @author eric.wittmann@redhat.com
  */
-public enum MultipleMatchType {
+public enum UnmatchedRequestType {
 
-    any, all
+    fail, pass
 
 }

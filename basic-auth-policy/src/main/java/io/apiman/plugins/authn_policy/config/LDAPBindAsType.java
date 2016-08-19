@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.apiman.plugins.authn_policy;
+package io.apiman.plugins.authn_policy.config;
 
 /**
- * What to do if no authorization rules match the request.
+ * How to bind to the ldap server.
  *
  * @author eric.wittmann@redhat.com
  */
-public enum UnmatchedRequestType {
-
-    fail, pass
-
+public enum LDAPBindAsType {
+    UserAccount, ServiceAccount;
 }

@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "BASIC Authentication Policy Plugin",
+  "description" : "This plugin provides a simple policy that enables BASIC authentication for an API.",
+  "version" : "${project.version}"
+}

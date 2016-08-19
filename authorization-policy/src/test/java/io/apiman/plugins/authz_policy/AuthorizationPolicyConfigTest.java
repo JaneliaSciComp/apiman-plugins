@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.apiman.plugins.authn_policy;
+package io.apiman.plugins.authz_policy;
 
+
+import io.apiman.plugins.authz_policy.AuthorizationConfig;
+import io.apiman.plugins.authz_policy.AuthorizationPolicy;
+import io.apiman.plugins.authz_policy.AuthorizationRule;
+import io.apiman.plugins.authz_policy.MultipleMatchType;
+import io.apiman.plugins.authz_policy.UnmatchedRequestType;
 
 import java.util.ArrayList;
 import java.util.Arrays;

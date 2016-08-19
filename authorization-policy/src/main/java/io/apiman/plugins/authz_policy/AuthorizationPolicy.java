@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.apiman.plugins.authn_policy;
+package io.apiman.plugins.authz_policy;
 
 import io.apiman.gateway.engine.beans.ApiRequest;
 import io.apiman.gateway.engine.beans.PolicyFailure;
