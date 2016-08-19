@@ -1,0 +1,14 @@
+{
+  "id" : "URLRewritingPolicy",
+  "name" : "URL Rewriting Policy",
+  "description" : "Responses from the back-end API will be modified by fixing up any incorrect URLs found with modified ones.  This is useful because apiman works through an API Gateway.",
+  "policyImpl" : "plugin:${project.groupId}:${project.artifactId}:${project.version}:${project.packaging}/io.apiman.plugins.url_policy.URLRewritingPolicy",
+  "icon" : "pencil-square",
+  "templates" : [
+    {
+      "language" : null,
+      "template" : "Responses will be modified by finding all text matching regular expression '@{fromRegex}' with '@{toReplacement}'."
+    }
+  ],
+  "formType" : "Default"
+}

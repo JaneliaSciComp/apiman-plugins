@@ -265,6 +265,7 @@
     <module>tra-policy</module>
     <module>transformation-policy</module>
     <module>url-whitelist-policy</module>
+    <module>url-rewriting-policy</module>
     <module>repository</module>
   </modules>
 

@@ -1,0 +1,6 @@
+{
+  "frameworkVersion" : 1.0,
+  "name" : "URL Rewriting Policy Plugin",
+  "description" : "This plugin provides a policy that can locate and re-write URLs found in API responses.",
+  "version" : "${project.version}"
+}
