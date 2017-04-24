@@ -77,7 +77,7 @@ public class PolicyFailureFactory {
 
     public PolicyFailure unsupportedJwt(IPolicyContext context, UnsupportedJwtException e) {
         return createAuthenticationPolicyFailure(context, AUTH_JWT_UNSUPPORTED_JWT,
-                Messages.getString("JWTPolicy.NoTransportSecurity")); //$NON-NLS-1$
+        		e.getLocalizedMessage());
     }
 
     public PolicyFailure noAuthenticationProvided(IPolicyContext context) {
