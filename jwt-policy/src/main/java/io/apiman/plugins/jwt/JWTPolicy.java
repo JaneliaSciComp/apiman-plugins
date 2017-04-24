@@ -102,10 +102,22 @@ public class JWTPolicy extends AbstractMappedPolicy<JWTPolicyBean> {
 
     private Map<String, Object> validateJwt(String token, ApiRequest request, JWTPolicyBean config)
             throws ExpiredJwtException, PrematureJwtException, MalformedJwtException, SignatureException, InvalidClaimException {
-        JwtParser parser = Jwts.parser()
-                .setSigningKey(config.getSigningKey())
-                .setAllowedClockSkewSeconds(config.getAllowedClockSkew());
+        JwtParser parser = Jwts.parser();
 
+		if (config.getSigningKey() != null) {
+			parser.setSigningKey(config.getSigningKey());
+		}
+		else if (config.getSigningKeyString() != null) {
+			parser.setSigningKey(config.getSigningKeyString());
+		}
+		else if (config.getRequireSigned()) {
+            throw new SignatureException("No signing key is provided, but signed tokens are required by configuration.");
+		}
+		
+		if (config.getAllowedClockSkew() != null) {
+			parser.setAllowedClockSkewSeconds(config.getAllowedClockSkew());
+		}
+        
         // Set all claims
         config.getRequiredClaims().stream() // TODO add type variable to allow dates, etc
             .forEach(requiredClaim -> parser.require(requiredClaim.getClaimName(), requiredClaim.getClaimValue()));

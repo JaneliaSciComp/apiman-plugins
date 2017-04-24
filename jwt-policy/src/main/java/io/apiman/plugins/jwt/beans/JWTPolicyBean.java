@@ -16,6 +16,7 @@
 package io.apiman.plugins.jwt.beans;
 
 import java.security.Key;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -270,9 +271,15 @@ public class JWTPolicyBean {
      */
     @JsonProperty("signingKeyString")
     public void setSigningKeyString(String signingKeyString) throws Exception {
-        if (signingKey == null) {
-            signingKey = PemUtils.decodePublicKey(signingKeyString);
-        }
+    	try {
+	        if (signingKey == null && signingKeyString != null && !"".equals(signingKeyString)) {
+	            signingKey = PemUtils.decodePublicKey(signingKeyString);
+	        }
+    	}
+    	catch (InvalidKeySpecException e) {
+    		// This is thrown if the key is not a public key (e.g. it is HMAC) 
+    		// In this case, we will pass the string directly to JJWT.
+    	}
         this.signingKeyString = signingKeyString;
     }
 

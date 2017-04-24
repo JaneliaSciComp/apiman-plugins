@@ -16,6 +16,17 @@
 
 package io.apiman.plugins.jwt;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.keycloak.common.util.PemUtils;
+
 import io.apiman.gateway.engine.beans.PolicyFailure;
 import io.apiman.gateway.engine.beans.PolicyFailureType;
 import io.apiman.test.common.mock.EchoResponse;
@@ -30,15 +41,6 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.keycloak.common.util.PemUtils;
-
 /**
  * @author Marc Savy {@literal <msavy@redhat.com>}
  */
@@ -48,7 +50,8 @@ public class JWTPolicyTest extends ApimanPolicyTest {
     private static final String PUBLIC_KEY_PEM = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmoV2gM0BGxgLQUpMkNdLKkXq46tcCBjoatHWqukrYj6VZ1t6OciWYKZRsmBVDsc34gFM6/fBqBn7zRwIK+OGXu1OLGoXEjR9I+awdxpQItjDq9lyFMDFPfXu6nCPSpZ+txNWl6V2cno6PpcEPpUYT6n6lUjcwpbTuGwq80P29Net212ksAwLJGvpIIUJ5yWuYJtirhoUeJEwKJAGbo5xrRrY9w1pkw+1kdPhUpP26pd80Mga2hcwJtykeIx5gLajRbhsXaijOv2FBtBSKgEH8tXISt16SBjaUbp642tLvqsT/VUPvvcgmcWWqhvm72ALaBwu3G/OHswRMCxxMohMyQIDAQAB";
     private static final String PRIVATE_KEY_PEM = "MIIEpQIBAAKCAQEAmoV2gM0BGxgLQUpMkNdLKkXq46tcCBjoatHWqukrYj6VZ1t6OciWYKZRsmBVDsc34gFM6/fBqBn7zRwIK+OGXu1OLGoXEjR9I+awdxpQItjDq9lyFMDFPfXu6nCPSpZ+txNWl6V2cno6PpcEPpUYT6n6lUjcwpbTuGwq80P29Net212ksAwLJGvpIIUJ5yWuYJtirhoUeJEwKJAGbo5xrRrY9w1pkw+1kdPhUpP26pd80Mga2hcwJtykeIx5gLajRbhsXaijOv2FBtBSKgEH8tXISt16SBjaUbp642tLvqsT/VUPvvcgmcWWqhvm72ALaBwu3G/OHswRMCxxMohMyQIDAQABAoIBAQCHcwZ10T5u6Zy0FtUXAiI5ZCCKgeOilXLmcBqkptAIxqNgfqedj1+CSUjD+/2Tfr5Vtp4fGob/PAelvDTNhBx9ibdE55phsvEfT1DQlpg4c5rSQUHnPzOnJLXRe+mfkFxzTthRBhHWN55mzypBUaCF9JJb2grp6ByfRPJBXApWhHrEALUwTd/9OiETsC4d7GbJ6ofk45tSl0HzNIeld9iEZk0WrgH95ucN75yCYv839096nB9nCH80yXV9JZIGj8bC6aPwbBnUnUdQqZxsDBlKNkT7U5AIdhqQdYjdXteTopuv12bflXtZGyTJoes1qLL8lpWgzkbjQg91+qmpCywhAoGBANv5opBc10C3y6ZJh9zepbM+wr0tbzUvTFAhj1Y1DoaHwxb9qV1mtWQZ5qEf1O+7RJYljv3hwzUc/gsZ13nBfySpVrdiVMTVIuLC8UPuH/sv0Z/uXcbwr3jxezrhJX5dJkhz1I8gPUKHLWIhMp/jZr26ieSPz9KwupTn+MPmPyYfAoGBALPTtHqZbB4dpxPmImv2l7PgR92CwVSd/yjrfOold4Oi1bODjhNSR6/h/YghWfRHAHIoRBWTlSfu/JsffJG/2bZa2xlcpqMb/fHzg05zBtmu8ozi3CAE7Twg5bE4GtuqV1hFXK4mPxzboSmj8H4puU85GNuTA/sRDd9saZSu6CAXAoGAJ30//rR7++VCzN5EYpUhn/TzVqyyWxTbmUL9DVfG/MWgcx8kaV0H0SmJKoGhY0v1+xJRAiimN4G15V5FPVlMLtOreo5Pc2pjsduXHj/ARAKImjJbaVxJ0+dd3OsQJQgp2DXbAbqi5K+JqSUWhnd3OTYkjQB4KXWKeTLPiLNrwLcCgYEAm7l8dCLCRv4kvo2vR1E/I+zYLxHZO96qpRPwk4+ohJ0RdKg6865wF/abKDTBglGuKC2IcCriordJl0fYBxtdfJYHYFokj+FgsxLOpbPkvcPLlYerWisKCeTvI93THGDRzMYcMU87nlDvqnCmhYq6R8nJJfSVIOku20k10ST6LTcCgYEAtrTamlY8tQ9Li+yi+yeGB2nxQCVkjQE0yl2GPxGrZaXlpH2mrhshtz0UUXcDmfpUOINCc3OzgWNCymNUesmVNuaobvgERXiDv51cSDgfYNT6NZz4+JPox2sGgeZIgkvQlFPr6+OxaMl8iQLHKwIqFjJAGCajKA4CodlIRaQClqM=";
     private static final String AUTHORIZATION = "Authorization";
-
+    private static final String SECRET_KEY_HS256 = "NE9mUGZEVzRFWnBIX2pJQ3ZBdWRxS01mdkFTMFdvM1llZ1JGRVFZZ2FUQQ==";
+    
     @Test
     @Configuration("{\n" +
             "  \"requireJWT\": true,\n" +
@@ -62,6 +65,50 @@ public class JWTPolicyTest extends ApimanPolicyTest {
     )
     public void signedValidToken() throws Throwable {
         String authVal = "Bearer " + signedToken();
+        PolicyTestRequest request = PolicyTestRequest.build(PolicyTestRequestType.GET, "/amirante")
+                .header(AUTHORIZATION, authVal);
+        PolicyTestResponse response = send(request);
+        EchoResponse echo = response.entity(EchoResponse.class);
+        Assert.assertNotNull(echo);
+        // Ensure we didn't remove the header and it has remained unchanged
+        Assert.assertEquals(authVal, echo.getHeaders().get(AUTHORIZATION));
+    }
+
+    @Test
+    @Configuration("{\n" +
+            "  \"requireJWT\": true,\n" +
+            "  \"requireSigned\": true,\n" +
+            "  \"requireTransportSecurity\": true,\n" +
+            "  \"stripTokens\": false,\n" +
+            "  \"signingKeyString\": \""+ SECRET_KEY_HS256 +"\",\n" +
+            "  \"allowedClockSkew\": 0,\n" +
+            "  \"requiredClaims\": [{ \"claimName\": \"sub\", \"claimValue\": \"france frichot\" }]\n" +
+            "}"
+    )
+    public void signedValidTokenHs256() throws Throwable {
+        String authVal = "Bearer " + signedTokenHs256();
+        PolicyTestRequest request = PolicyTestRequest.build(PolicyTestRequestType.GET, "/amirante")
+                .header(AUTHORIZATION, authVal);
+        PolicyTestResponse response = send(request);
+        EchoResponse echo = response.entity(EchoResponse.class);
+        Assert.assertNotNull(echo);
+        // Ensure we didn't remove the header and it has remained unchanged
+        Assert.assertEquals(authVal, echo.getHeaders().get(AUTHORIZATION));
+    }
+
+    @Test
+    @Configuration("{\n" +
+            "  \"requireJWT\": true,\n" +
+            "  \"requireSigned\": true,\n" +
+            "  \"requireTransportSecurity\": true,\n" +
+            "  \"stripTokens\": false,\n" +
+            "  \"signingKeyString\": \""+ SECRET_KEY_HS256 +"\",\n" +
+            "  \"allowedClockSkew\": 0\n" +
+            "}"
+    )
+    public void signedValidTokenHs256Ready() throws Throwable {
+    	String token = signedTokenHs256Ready();
+        String authVal = "Bearer " + token;
         PolicyTestRequest request = PolicyTestRequest.build(PolicyTestRequestType.GET, "/amirante")
                 .header(AUTHORIZATION, authVal);
         PolicyTestResponse response = send(request);
@@ -112,6 +159,25 @@ public class JWTPolicyTest extends ApimanPolicyTest {
         Assert.assertNotNull(echo);
     }
 
+    @Test
+    @Configuration("{\n" +
+            "  \"requireJWT\": true,\n" +
+            "  \"requireSigned\": false,\n" +
+            "  \"requireTransportSecurity\": true,\n" +
+            "  \"stripTokens\": true,\n" +
+            "  \"allowedClockSkew\": 0,\n" +
+            "  \"requiredClaims\": [{ \"claimName\": \"sub\", \"claimValue\": \"france frichot\" }]\n" +
+            "}"
+    )
+    public void unsignedValidTokenHeader2() throws Throwable {
+        PolicyTestRequest request = PolicyTestRequest.build(PolicyTestRequestType.GET, "/amirante")
+                .header(AUTHORIZATION, "Bearer " + unsignedToken());
+
+        PolicyTestResponse response = send(request);
+        EchoResponse echo = response.entity(EchoResponse.class);
+        Assert.assertNotNull(echo);
+    }
+    
     @Test
     @Configuration("{\n" +
             "  \"requireJWT\": true,\n" +
@@ -362,8 +428,21 @@ public class JWTPolicyTest extends ApimanPolicyTest {
         JwtBuilder jwts = Jwts.builder().setSubject("france frichot")
                 .signWith(SignatureAlgorithm.RS256, PemUtils.decodePrivateKey(PRIVATE_KEY_PEM));
         return jwts.compact();
-   }
+    }
 
+    private String signedTokenHs256Ready() throws Exception {
+        JwtBuilder jwts = Jwts.builder().setSubject("france frichot")
+        		.setHeaderParam("typ", "JWT")
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY_HS256);
+        return jwts.compact();
+    }
+    
+    private String signedTokenHs256() throws Exception {
+        JwtBuilder jwts = Jwts.builder().setSubject("france frichot")
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY_HS256);
+        return jwts.compact();
+    }
+    
     private String unsignedToken() throws Exception {
          JwtBuilder jwts = Jwts.builder().setSubject("france frichot");
          return jwts.compact();
