@@ -107,7 +107,7 @@ public class JWTPolicyTest extends ApimanPolicyTest {
             "}"
     )
     public void signedValidTokenHs256Ready() throws Throwable {
-    	String token = signedTokenHs256Ready();
+        String token = signedTokenHs256Ready();
         String authVal = "Bearer " + token;
         PolicyTestRequest request = PolicyTestRequest.build(PolicyTestRequestType.GET, "/amirante")
                 .header(AUTHORIZATION, authVal);
@@ -432,7 +432,7 @@ public class JWTPolicyTest extends ApimanPolicyTest {
 
     private String signedTokenHs256Ready() throws Exception {
         JwtBuilder jwts = Jwts.builder().setSubject("france frichot")
-        		.setHeaderParam("typ", "JWT")
+                .setHeaderParam("typ", "JWT")
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY_HS256);
         return jwts.compact();
     }

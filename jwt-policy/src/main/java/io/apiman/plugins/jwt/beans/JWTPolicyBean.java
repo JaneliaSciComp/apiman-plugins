@@ -271,15 +271,15 @@ public class JWTPolicyBean {
      */
     @JsonProperty("signingKeyString")
     public void setSigningKeyString(String signingKeyString) throws Exception {
-    	try {
-	        if (signingKey == null && signingKeyString != null && !"".equals(signingKeyString)) {
-	            signingKey = PemUtils.decodePublicKey(signingKeyString);
-	        }
-    	}
-    	catch (InvalidKeySpecException e) {
-    		// This is thrown if the key is not a public key (e.g. it is HMAC) 
-    		// In this case, we will pass the string directly to JJWT.
-    	}
+        try {
+            if (signingKey == null && signingKeyString != null && !"".equals(signingKeyString)) {
+                signingKey = PemUtils.decodePublicKey(signingKeyString);
+            }
+        }
+        catch (InvalidKeySpecException e) {
+            // This is thrown if the key is not a public key (e.g. it is HMAC)
+            // In this case, we will pass the string directly to JJWT.
+        }
         this.signingKeyString = signingKeyString;
     }
 
